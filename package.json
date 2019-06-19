@@ -1,12 +1,12 @@
 {
   "name": "primap",
-  "version": "0.0.0-semantically-released",
+  "version": "0.0.0-development",
   "description": "Concise syntax for class truly private members",
   "main": "src/index.js",
   "scripts": {
     "commit": "git-cz",
-    "test:single": "mocha src/index.test.js",
-    "semantic-release": "semantic-release --publish"
+    "test": "mocha src/index.test.js",
+    "semantic-release": "semantic-release"
   },
   "repository": {
     "type": "git",
