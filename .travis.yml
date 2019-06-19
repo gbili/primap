@@ -13,4 +13,4 @@ jobs:
         - NODE_ENV=production
       node_js: lts/*
       script:
-        - npm semantic-release
+        - npm run semantic-release
