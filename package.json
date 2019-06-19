@@ -1,0 +1,32 @@
+{
+  "name": "primap",
+  "version": "1.0.0",
+  "description": "Concise syntax for class truly private members",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "mocha src/index.test.js -w",
+    "semantic-release": "semantic-release"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gbili/primap.git"
+  },
+  "keywords": [
+    "private",
+    "members",
+    "class",
+    "property",
+    "weakmap"
+  ],
+  "author": "Guillermo Pages <mail@guillermo.at> (https://guillermo.at)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gbili/primap/issues"
+  },
+  "homepage": "https://github.com/gbili/primap#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "chai": "4.2.0",
+    "mocha": "6.1.4"
+  }
+}
