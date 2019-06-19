@@ -1,17 +1,13 @@
 sudo: false
 language: node_js
-cache:
-    directories:
-        - node_modules
 notifications:
     email: false
 node_js:
-  - 8
-  - 6
-before_install:
-    - npm i -g npm
+    - node
 before_script:
     - npm prune
+install:
+    - npm install
 script:
     - npm run test:single
 after_success:
