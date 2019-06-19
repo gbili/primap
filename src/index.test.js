@@ -20,4 +20,9 @@ describe(`_p`, function() {
     _p('myOtherprop', val2);
     expect(_p().myOtherprop).to.be.equal(val2);
   });
+
+  it('should accept getting with single parameter', function() {
+    const val2 = 'my value 2';
+    expect(_p('myOtherprop')).to.be.equal(val2);
+  });
 });
