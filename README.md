@@ -12,7 +12,7 @@ import _p from 'primap';
 
 Class Hello {
   constructor(from, to) {
-    _p().bind(this); // important!
+    _p.bind(this); // important!
 
     // setting as property access
     _p().from = from;
