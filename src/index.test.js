@@ -25,4 +25,9 @@ describe(`_p`, function() {
     const val2 = 'my value 2';
     expect(_p('myOtherprop')).to.be.equal(val2);
   });
+
+  it('should return set value if set from parameters', function() {
+    const val2 = 'my value 2';
+    expect(_p('myOtherprop', val2)).to.be.equal(val2);
+  });
 });
