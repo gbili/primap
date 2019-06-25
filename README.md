@@ -10,7 +10,7 @@ Import `primap` in your class definition module and start using it. The importan
 // var _p = require('primap');
 import _p from 'primap';
 
-Class Hello {
+class Hello {
   constructor(from, to) {
     _p.bind(this); // important!
 
