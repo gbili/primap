@@ -6,41 +6,103 @@ This is a very succint implementation and abstraction
 
 ## Usage:
 Import `primap` in your class definition module and start using it. The important step is to `bind` it to your object reference before setting any properties on `_p()`:
+### Example: Guess the Exact Card 
+Here is an example with a simple card game where the player wins only if he guesses the secret random card. The player has only 3 chances.
 ```javascript
 // var _p = require('primap');
 import _p from 'primap';
 
-class Hello {
-  constructor(from, to) {
+class ExactCardGame {
+  constructor() {
     _p.bind(this); // important!
 
-    // setting as property access
-    _p().from = from;
+    this.deckOfCards = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
 
-    // setting as params for dynamic prop names for example
-    _p('to', to);
+    const randomNumber = Math.floor(Math.random()*12;
+    // we want to privately hold the value of a card
+    // so the player cannot cheat (set using property style)
+    _p().secretCard = this.deckOfCards[randomNumber];
+
+    // private number of remaining tries, (set using param style)
+    _p('remainingTries', 3);
+    // could also: _p().remainingTries = 3 (set using property style)
+
   }
 
-  get greeter() {
-    return _p().from;
+  makeAGuess(guessedCard) {
+    if (_p().remainingTries-- <= 0) {
+        console.log('Sorry mate, you already ' + ( _p().lastTry === _p().secretCard ? 'won' : 'lost'));
+        return;
+    }
+    if (_p().secretCard === guessedCard) {
+      console.log('Hurray!!! You made it! Congrats!!');
+    } else {
+      console.log(`Nope, you have ${_p().remainingTries} more tries.`);
+    }
+    // keep track of last try
+    _p().lastTry = guessedCard;
   }
 
-  sayIt() {
-    return `Hello darling! I know your name is ${_p().to}, I'm ${this.greeter}`
+  get remainingTries() {
+    return _p().remainingTries;
   }
 }
 
-// module.exports = Hello;
-export default Hello;
+// module.exports = ExactCardGame;
+export default ExactCardGame;
 ```
-Import your class somewhere else
+Here is a sample usage:
 ```javascript
-// var Hello = require('./Hello');
-import Hello from './Hello';
+// var ExactCardGame = require('./ExactCardGame');
+import ExactCardGame from './ExactCardGame';
 
-const hello = new Hello('John', 'Mary');
+const game = new ExactCardGame();
 
-hello.sayIt(); // "Hello darling! I know your name is Mary, I'm John"
+game.makeAGuess(4); // "Nope, you have 2 more tries."
+game.makeAGuess(12); // "Nope, you have 1 more tries."
+game.makeAGuess(11); // "Hurray!!! You made it! Congrats!!"
+```
 
-hello.from; // undefined
+### Reference
+#### Initialize
+`import` and `bind`:
+"node style"
+```javascript
+var _p = require('primap');
+```
+"ES6 style":
+```javascript
+import _p from 'primap'
+```
+Binding is mandatory:
+```javascript
+const someObject = {}
+_p().bind(someObject); //_p
+```
+Above we bound to an object, but the real benefits come from using `_p()` within a class module and binding `this`. So:
+```javascript
+import _p from 'primap';
+class MyClass {
+  constructor() {
+    _p().bind(this);
+  }
+}
+```
+#### Set
+"property style":
+```javascript
+_p().myPrivateProp = 'My private value';
+```
+"param style":
+```javascript
+_p('myPrivateProp', 'My private value');
+```
+#### Get
+"property style":
+```javascript
+_p().myPrivateProp;
+```
+"param style":
+```javascript
+_p('myPrivateProp');
 ```
